@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'reviews/new'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -19,11 +20,11 @@ Rails.application.routes.draw do
   # A visitor can see the details of a restaurant,
   # with all the reviews related to the restaurant.
   get "restaurants/:id", to: "restaurants#show", as: :restaurant
-  resources :restaurants do
-    resources :reviews, only: [:new]
-  end
 
 
   # A visitor can add a new review to a restaurant
+  resources :restaurants do
+    resources :reviews, only: [:new, :create]
+  end
 
 end
